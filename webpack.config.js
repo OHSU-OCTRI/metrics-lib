@@ -25,7 +25,8 @@ module.exports = {
       // expose the Interactor class as a global so it can be used from in-page scripts
       library: {
         name: 'Interactor',
-        type: 'window'
+        type: 'window',
+        export: 'default'
       }
     }
   },
@@ -37,7 +38,7 @@ module.exports = {
   },
   output: {
     path: path.join(__dirname, 'target/classes/static/assets'),
-    filename: 'js/[name].js'
+    filename: 'js/[name].js',
   },
   module: {
     rules: [
@@ -79,14 +80,6 @@ module.exports = {
     })
   ],
   optimization: {
-    splitChunks: {
-      cacheGroups: {
-        vendor: {
-          test: /[\\/]node_modules[\\/]/,
-          name: 'metricslib-vendor',
-          chunks: 'initial'
-        }
-      }
-    }
+    splitChunks: false
   }
 };
