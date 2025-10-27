@@ -32,6 +32,10 @@ public class AnalyticsEventController {
 	@Autowired
 	private UserRepository userRepository;
 
+	/**
+	 * @param event the analytics event to log
+	 * @return the response entity
+	 */
 	@PostMapping(path = "/data/analytics_event", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> logAnalyticsEvent(@RequestBody AnalyticsEvent event) {
 		SecurityHelper securityHelper = new SecurityHelper(SecurityContextHolder.getContext());
