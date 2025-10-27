@@ -83,7 +83,7 @@ module.exports = {
       cacheGroups: {
         vendor: {
           test: /[\\/]node_modules[\\/]/,
-          name: 'notificationlib-vendor',
+          name: 'metricslib-vendor',
           chunks: 'initial'
         }
       }
