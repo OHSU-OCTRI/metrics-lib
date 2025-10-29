@@ -17,7 +17,7 @@ CREATE TABLE `analytics_event` (
 	`language` varchar(255) DEFAULT NULL,
 	`load_time` datetime DEFAULT NULL,
 	`page_location` varchar(255) DEFAULT NULL,
-	`referrer` varchar(255) DEFAULT NULL,
+	`referrer` varchar(500) DEFAULT NULL,
 	`platform` varchar(255) DEFAULT NULL,
 	`port` varchar(255) DEFAULT NULL,
 	`start_inner_height` int DEFAULT NULL,
