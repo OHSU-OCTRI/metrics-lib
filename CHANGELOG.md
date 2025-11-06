@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Configurable properties for the interactor (CIS-3396)
+- An installation script to streamline use of the interactor (CIS-3396)
+
+### Changed
+
+- Set default interactor debug mode to false in the absence of overriding configuration (CIS-3396)
+
 ## [0.1.0] - 2025-10-30
 
 ### Added
