@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Configurable properties for the interactor (CIS-3396)
 - An installation script to streamline use of the interactor (CIS-3396)
+- Linting and Prettier config
 
 ### Changed
 
