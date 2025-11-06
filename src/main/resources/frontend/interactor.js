@@ -124,7 +124,7 @@ export default class Interactor {
       typeof config.endpoint === 'string' ? config.endpoint : '/interactions';
 
     // enable debugging
-    this.debug = typeof config.debug === 'boolean' ? config.debug : true;
+    this.debug = typeof config.debug === 'boolean' ? config.debug : false;
 
     // name of the CSRF token header
     this.csrfHeader = typeof config.csrfHeader === 'string' ? config.csrfHeader : '';

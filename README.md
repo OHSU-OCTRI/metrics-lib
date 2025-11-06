@@ -26,49 +26,39 @@ To create the database tables used by the library, copy the SQL migrations from 
 
 ### Modify the Application Template Advice
 
-To work seamlessly with this library, your application should be using the OCTRI Authentication Library and ideally have been generated using the OCTRI Spring Boot archetype. This will set up some of the appropriate TemplateAdvice elements in the model. Your application should have a file called ApplicationTemplateAdvice. Here, you will want to create a new model parameter for determining the logic for when metrics should be included on a page. At a minimum, you should ensure the user is logged in. Typically we have only collected metrics on users that are not Admin or Super users:
+To work seamlessly with this library, your application should be using the OCTRI Authentication Library and ideally have been generated using the OCTRI Spring Boot archetype. This will set up some of the appropriate TemplateAdvice elements in the model. Your application should have a file called ApplicationTemplateAdvice. Here, you will want to determine the logic for when metrics should be included on a page. At a minimum, you should ensure the user is logged in. Typically we have only collected metrics on users that are not Admin or Super users. If metrics should be enabled, add the interactor scripts and properties to the page:
 
 ```java
 SecurityHelper securityHelper = new SecurityHelper(SecurityContextHolder.getContext());
 boolean enableAnalyticsCollection = securityHelper.isLoggedIn() && !securityHelper.isAdminOrSuper();
-model.addAttribute("enableAnalyticsCollection", enableAnalyticsCollection);
+if (enableAnalyticsCollection) {
+	model.addAttribute("interactorProperties", interactorProperties);
+	ViewUtils.addPageScript(model.asMap(), "interactor.js");
+	ViewUtils.addPageScript(model.asMap(), "install-interactor.js");
+}
 ```
 
-### Create an Interactor
+### Add configuration to the header
 
-To use the Interactor in OCTRI applications, modify the common header and footer templates to install the Interactor on each page.
-
-In `header.mustache`, add meta variables to track csrf info:
+To use the Interactor in OCTRI applications, make sure the common header has the following script to inject the configuration properties into the Interactor. This script should only be added if there are interactorProperties:
 
 ```html
-<meta name="_csrf_header" content="{{#_csrf.headerName}}{{.}}{{/_csrf.headerName}}">
-<meta name="_csrf" content="{{#_csrf.token}}{{.}}{{/_csrf.token}}">
-```
-
-In `footer_assets.mustache`, check for the model property `enableAnalyticsCollection`. If it should be enabled, get the interactor script and create a custom interactor. The code below will register interactions for elements with the classes provided along with the listed video states:
-
-```html
-{{#enableAnalyticsCollection}}
-<script type="text/javascript" src="{{req.contextPath}}/assets/js/interactor.js"></script>
-<script type="text/javascript">
-	let interactor = new window.Interactor({
+{{#interactorProperties}}
+<script>
+	window.interactorConfig = {
+		contextPath: '{{req.contextPath}}/',
 		appVersion: '{{appVersion}}',
-		debug: true,
-		interactionElement: '.accordion-button, .btn, .nav-link, .thumbnail',
-		endpoint: '{{req.contextPath}}/data/analytics_event',
-		csrfHeader: $('meta[name=_csrf_header]').attr('content'),
-		csrfToken: $('meta[name=_csrf]').attr('content')
-	});
-	// Video interactions
-	interactor.addInteractionElement(
-		'video',
-		['play', 'ended', 'pause', 'ratechange', 'waiting', 'seeking', 'seeked']
-	);
-{{/enableAnalyticsCollection}}
+		csrfHeader: '{{_csrf.headerName}}',
+		csrfToken: '{{_csrf.token}}',
+		elementSelector: '{{elementSelector}}',
+		debug: {{debug}},
+		logInterval: {{logInterval}}
+	};
 </script>
+{{/interactorProperties}}
 ```
 
-Note that you must provide the endpoint shown above (`{{req.contextPath}}/data/analytics_event`), because this is the route configured by this library. The above also assumes that you have a model parameter appVersion, which is created automatically if you use the Authentication Library and initiate your application with the Spring Boot Archetype.
+The above assumes that you have the model parameters appVersion and req.contextPath, which are created automatically if you use the Authentication Library and initiate your application with the Spring Boot Archetype.
 
 ## Future Direction
 
