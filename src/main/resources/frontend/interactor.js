@@ -183,6 +183,31 @@ export default class Interactor {
     this.state = {};
     this.initializeState();
     this.bindEvents(interactionElement, interactionEvents);
+
+    // Set up observer for new elements added to DOM
+    if (this.interactions === true) {
+      const observer = new MutationObserver(mutations => {
+        for (const mutation of mutations) {
+          mutation.addedNodes.forEach(node => {
+            if (node.nodeType !== 1) return; // skip text/comment nodes
+
+            if (node.matches && node.matches(interactionElement)) {
+              this.addInteractionElementListener(node, interactionEvents);
+            }
+
+            // Check descendants
+            const matches = node.querySelectorAll
+              ? node.querySelectorAll(interactionElement)
+              : [];
+            matches.forEach(el =>
+              this.addInteractionElementListener(el, interactionEvents)
+            );
+          });
+        }
+      });
+
+      observer.observe(document.body, { childList: true, subtree: true });
+    }
   }
 
   // Create event handlers
@@ -366,13 +391,18 @@ export default class Interactor {
     // Capture additional interactions
     if (this.interactions === true) {
       document.querySelectorAll(interactionElement).forEach(element => {
-        interactionEvents.forEach(evtType => {
-          element.addEventListener(evtType, evt => {
-            evt.stopPropagation();
-            this.addInteraction(evt, 'INTERACTION');
-          });
-        });
+        this.addInteractionElementListener(element, interactionEvents);
       });
     }
+  }
+
+  // Add listeners for the given element and interaction events
+  addInteractionElementListener(element, interactionEvents) {
+    interactionEvents.forEach(evtType => {
+      element.addEventListener(evtType, evt => {
+        evt.stopPropagation();
+        this.addInteraction(evt, 'INTERACTION');
+      });
+    });
   }
 }
