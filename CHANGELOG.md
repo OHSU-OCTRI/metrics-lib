@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Add handling to check parents when innerText is blank
+
+### Fixed
+
+- Fixed disconnect in Interactor properties
+
 ## [0.2.0] - 2025-11-06
 
 ### Added

@@ -78,7 +78,42 @@ function eventContents(evt) {
       source: target.src
     });
   }
-  return evt.target.innerText;
+  let contents = target?.innerText || '';
+
+  // If the target has no readable inner text, walk up the DOM until we find
+  // an element with usable text (handles icons inside links/buttons, etc.).
+  if (!contents.trim()) {
+    let el = target;
+    while (el && el !== document.body && el !== document.documentElement) {
+      // Check innerText first
+      const text = (el.innerText || '').trim();
+      if (text) {
+        contents = text;
+        break;
+      }
+
+      // Check common accessible attributes that might contain a label
+      const aria = el.getAttribute && el.getAttribute('aria-label');
+      if (aria && aria.trim()) {
+        contents = aria.trim();
+        break;
+      }
+      if (el.title && el.title.trim()) {
+        contents = el.title.trim();
+        break;
+      }
+      const alt = el.getAttribute && el.getAttribute('alt');
+      if (alt && alt.trim()) {
+        contents = alt.trim();
+        break;
+      }
+      // Move up to the parent and try again
+      el = el.parentElement;
+    }
+  }
+
+  // Return the first 255 characters of the resolved contents
+  return contents.substring(0, 254) || '';
 }
 
 export default class Interactor {
