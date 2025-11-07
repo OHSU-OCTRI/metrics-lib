@@ -50,7 +50,7 @@ To use the Interactor in OCTRI applications, make sure the common header has the
 		appVersion: '{{appVersion}}',
 		csrfHeader: '{{_csrf.headerName}}',
 		csrfToken: '{{_csrf.token}}',
-		elementSelector: '{{elementSelector}}',
+		interactionElement: '{{interactionElement}}',
 		debug: {{debug}},
 		logInterval: {{logInterval}}
 	};
