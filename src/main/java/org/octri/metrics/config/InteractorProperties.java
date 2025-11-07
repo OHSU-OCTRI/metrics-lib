@@ -11,7 +11,7 @@ public class InteractorProperties {
 	/**
 	 * CSS selector for interaction elements to monitor.
 	 */
-	private String elementSelector = ".accordion-button, .btn, .nav-link, .thumbnail";
+	private String interactionElement = ".accordion-button, .btn, .nav-link, .thumbnail";
 	/**
 	 * Whether to enable debug logging.
 	 */
@@ -27,17 +27,17 @@ public class InteractorProperties {
 	 * 
 	 * @return a string representing the CSS selector
 	 */
-	public String getElementSelector() {
-		return elementSelector;
+	public String getInteractionElement() {
+		return interactionElement;
 	}
 
 	/**
 	 * Set the CSS selector for interaction elements to monitor.
 	 * 
-	 * @param elementSelector a string representing the CSS selector
+	 * @param interactionElement a string representing the CSS selector
 	 */
-	public void setElementSelector(String elementSelector) {
-		this.elementSelector = elementSelector;
+	public void setInteractionElement(String interactionElement) {
+		this.interactionElement = interactionElement;
 	}
 
 	/**

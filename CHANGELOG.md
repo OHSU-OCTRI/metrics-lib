@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Add handling to check parents when innerText is blank
+- Add an observer to capture DOM elements added after the Interactor is initialized
+
+### Fixed
+
+- Fixed disconnect in Interactor properties
+- Truncate interaction content to avoid database persistence errors
+
 ## [0.2.0] - 2025-11-06
 
 ### Added
