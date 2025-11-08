@@ -45,7 +45,7 @@ const videoEvents = [
  *
  * @param {Event} evt
  */
-function eventContents(evt) {
+function eventContents(evt, interactionSelector) {
   if (videoEvents.includes(evt.type)) {
     const video = evt.target;
 
@@ -78,38 +78,28 @@ function eventContents(evt) {
       source: target.src
     });
   }
-  let contents = target?.innerText || '';
 
-  // If the target has no readable inner text, walk up the DOM until we find
-  // an element with usable text (handles icons inside links/buttons, etc.).
-  if (!contents.trim()) {
-    let el = target;
-    while (el && el !== document.body && el !== document.documentElement) {
-      // Check innerText first
-      const text = (el.innerText || '').trim();
-      if (text) {
-        contents = text;
-        break;
-      }
+  const closestMatchingElement = target.closest(interactionSelector);
 
-      // Check common accessible attributes that might contain a label
-      const aria = el.getAttribute && el.getAttribute('aria-label');
-      if (aria && aria.trim()) {
-        contents = aria.trim();
-        break;
-      }
-      if (el.title && el.title.trim()) {
-        contents = el.title.trim();
-        break;
-      }
-      const alt = el.getAttribute && el.getAttribute('alt');
-      if (alt && alt.trim()) {
-        contents = alt.trim();
-        break;
-      }
-      // Move up to the parent and try again
-      el = el.parentElement;
-    }
+  // Check accessible attributes, title, and innerText for content
+  let contents = '';
+  const aria =
+    closestMatchingElement.getAttribute &&
+    closestMatchingElement.getAttribute('aria-label');
+  if (aria && aria.trim()) {
+    contents = aria.trim();
+  } else if (closestMatchingElement.title && closestMatchingElement.title.trim()) {
+    contents = closestMatchingElement.title.trim();
+  } else if (
+    closestMatchingElement.getAttribute &&
+    closestMatchingElement.getAttribute('alt')
+  ) {
+    contents = closestMatchingElement.getAttribute('alt').trim();
+  } else if (
+    closestMatchingElement.innerText &&
+    closestMatchingElement.innerText.trim()
+  ) {
+    contents = closestMatchingElement.innerText.trim();
   }
 
   // Return the first 255 characters of the resolved contents
@@ -127,9 +117,9 @@ export default class Interactor {
       typeof config.interactions === 'boolean' ? config.interactions : true;
 
     // CSS selector used to identify elements that trigger interactions
-    let interactionElement =
-      typeof config.interactionElement === 'string'
-        ? config.interactionElement
+    let interactionSelector =
+      typeof config.interactionSelector === 'string'
+        ? config.interactionSelector
         : 'interaction';
 
     // list of events that trigger an interaction to be recorded
@@ -182,7 +172,7 @@ export default class Interactor {
     this.records = [];
     this.state = {};
     this.initializeState();
-    this.bindEvents(interactionElement, interactionEvents);
+    this.bindEvents(interactionSelector, interactionEvents);
 
     // Set up observer for new elements added to DOM
     if (this.interactions === true) {
@@ -191,13 +181,13 @@ export default class Interactor {
           mutation.addedNodes.forEach(node => {
             if (node.nodeType !== 1) return; // skip text/comment nodes
 
-            if (node.matches && node.matches(interactionElement)) {
+            if (node.matches && node.matches(interactionSelector)) {
               this.addInteractionElementListener(node, interactionEvents);
             }
 
             // Check descendants
             const matches = node.querySelectorAll
-              ? node.querySelectorAll(interactionElement)
+              ? node.querySelectorAll(interactionSelector)
               : [];
             matches.forEach(el =>
               this.addInteractionElementListener(el, interactionEvents)
@@ -211,8 +201,8 @@ export default class Interactor {
   }
 
   // Create event handlers
-  bindEvents(interactionElement, interactionEvents) {
-    this.addInteractionElement(interactionElement, interactionEvents);
+  bindEvents(interactionSelector, interactionEvents) {
+    this.addInteractionElement(interactionSelector, interactionEvents);
 
     // Capture conversions
     if (this.conversions === true) {
@@ -220,7 +210,7 @@ export default class Interactor {
         this.conversionEvents.forEach(evtType => {
           element.addEventListener(evtType, evt => {
             evt.stopPropagation();
-            this.addInteraction(evt, 'CONVERSION');
+            this.addInteraction(evt, interactionSelector, 'CONVERSION');
           });
         });
       });
@@ -265,14 +255,14 @@ export default class Interactor {
   }
 
   // Record interaction with a page element
-  addInteraction(evt, type) {
+  addInteraction(evt, interactionSelector, type) {
     // Interaction Object
     let interaction = {
       type: type,
       event: evt.type,
       targetTag: evt.target.nodeName,
       targetClasses: evt.target.className,
-      content: eventContents(evt),
+      content: eventContents(evt, interactionSelector),
       clientX: evt.clientX,
       clientY: evt.clientY,
       screenX: evt.screenX,
@@ -387,21 +377,25 @@ export default class Interactor {
   }
 
   // Add a new interaction element tied to different events
-  addInteractionElement(interactionElement, interactionEvents) {
+  addInteractionElement(interactionSelector, interactionEvents) {
     // Capture additional interactions
     if (this.interactions === true) {
-      document.querySelectorAll(interactionElement).forEach(element => {
-        this.addInteractionElementListener(element, interactionEvents);
+      document.querySelectorAll(interactionSelector).forEach(element => {
+        this.addInteractionElementListener(
+          element,
+          interactionEvents,
+          interactionSelector
+        );
       });
     }
   }
 
   // Add listeners for the given element and interaction events
-  addInteractionElementListener(element, interactionEvents) {
+  addInteractionElementListener(element, interactionEvents, interactionSelector) {
     interactionEvents.forEach(evtType => {
       element.addEventListener(evtType, evt => {
         evt.stopPropagation();
-        this.addInteraction(evt, 'INTERACTION');
+        this.addInteraction(evt, interactionSelector, 'INTERACTION');
       });
     });
   }

@@ -9,8 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Add handling to check parents when innerText is blank
+- Add handling to find the closest matching element to populate content
+- Favor accessibility attributes over innerText to populate content
 - Add an observer to capture DOM elements added after the Interactor is initialized
+
+# Changed
+
+- Rename configurable property from interactionElement to interactionSelector
 
 ### Fixed
 
