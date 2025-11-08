@@ -45,7 +45,7 @@ const videoEvents = [
  *
  * @param {Event} evt
  */
-function eventContents(evt, configuredElements) {
+function eventContents(evt, interactionSelector) {
   if (videoEvents.includes(evt.type)) {
     const video = evt.target;
 
@@ -79,7 +79,7 @@ function eventContents(evt, configuredElements) {
     });
   }
 
-  const closestMatchingElement = target.closest(configuredElements);
+  const closestMatchingElement = target.closest(interactionSelector);
 
   // Check accessible attributes, title, and innerText for content
   let contents = '';
@@ -117,9 +117,9 @@ export default class Interactor {
       typeof config.interactions === 'boolean' ? config.interactions : true;
 
     // CSS selector used to identify elements that trigger interactions
-    let interactionElement =
-      typeof config.interactionElement === 'string'
-        ? config.interactionElement
+    let interactionSelector =
+      typeof config.interactionSelector === 'string'
+        ? config.interactionSelector
         : 'interaction';
 
     // list of events that trigger an interaction to be recorded
@@ -172,7 +172,7 @@ export default class Interactor {
     this.records = [];
     this.state = {};
     this.initializeState();
-    this.bindEvents(interactionElement, interactionEvents);
+    this.bindEvents(interactionSelector, interactionEvents);
 
     // Set up observer for new elements added to DOM
     if (this.interactions === true) {
@@ -181,13 +181,13 @@ export default class Interactor {
           mutation.addedNodes.forEach(node => {
             if (node.nodeType !== 1) return; // skip text/comment nodes
 
-            if (node.matches && node.matches(interactionElement)) {
+            if (node.matches && node.matches(interactionSelector)) {
               this.addInteractionElementListener(node, interactionEvents);
             }
 
             // Check descendants
             const matches = node.querySelectorAll
-              ? node.querySelectorAll(interactionElement)
+              ? node.querySelectorAll(interactionSelector)
               : [];
             matches.forEach(el =>
               this.addInteractionElementListener(el, interactionEvents)
@@ -201,8 +201,8 @@ export default class Interactor {
   }
 
   // Create event handlers
-  bindEvents(interactionElement, interactionEvents) {
-    this.addInteractionElement(interactionElement, interactionEvents);
+  bindEvents(interactionSelector, interactionEvents) {
+    this.addInteractionElement(interactionSelector, interactionEvents);
 
     // Capture conversions
     if (this.conversions === true) {
@@ -210,7 +210,7 @@ export default class Interactor {
         this.conversionEvents.forEach(evtType => {
           element.addEventListener(evtType, evt => {
             evt.stopPropagation();
-            this.addInteraction(evt, interactionElement, 'CONVERSION');
+            this.addInteraction(evt, interactionSelector, 'CONVERSION');
           });
         });
       });
@@ -255,14 +255,14 @@ export default class Interactor {
   }
 
   // Record interaction with a page element
-  addInteraction(evt, configuredElements, type) {
+  addInteraction(evt, interactionSelector, type) {
     // Interaction Object
     let interaction = {
       type: type,
       event: evt.type,
       targetTag: evt.target.nodeName,
       targetClasses: evt.target.className,
-      content: eventContents(evt, configuredElements),
+      content: eventContents(evt, interactionSelector),
       clientX: evt.clientX,
       clientY: evt.clientY,
       screenX: evt.screenX,
@@ -377,25 +377,25 @@ export default class Interactor {
   }
 
   // Add a new interaction element tied to different events
-  addInteractionElement(interactionElement, interactionEvents) {
+  addInteractionElement(interactionSelector, interactionEvents) {
     // Capture additional interactions
     if (this.interactions === true) {
-      document.querySelectorAll(interactionElement).forEach(element => {
+      document.querySelectorAll(interactionSelector).forEach(element => {
         this.addInteractionElementListener(
           element,
           interactionEvents,
-          interactionElement
+          interactionSelector
         );
       });
     }
   }
 
   // Add listeners for the given element and interaction events
-  addInteractionElementListener(element, interactionEvents, configuredElements) {
+  addInteractionElementListener(element, interactionEvents, interactionSelector) {
     interactionEvents.forEach(evtType => {
       element.addEventListener(evtType, evt => {
         evt.stopPropagation();
-        this.addInteraction(evt, configuredElements, 'INTERACTION');
+        this.addInteraction(evt, interactionSelector, 'INTERACTION');
       });
     });
   }
