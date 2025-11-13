@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.0] - 2025-11-13
+
 ### Added
 
 - Add handling to find the closest matching element to populate content
@@ -40,6 +42,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial implementation of the Metrics Library (COMPASS-127)
 
-[unreleased]: https://github.com/OHSU-OCTRI/metrics-lib/compare/v0.2.0...HEAD
+[unreleased]: https://github.com/OHSU-OCTRI/metrics-lib/compare/v0.3.0...HEAD
+[0.3.0]: https://github.com/OHSU-OCTRI/metrics-lib/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/OHSU-OCTRI/metrics-lib/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/OHSU-OCTRI/metrics-lib/compare/b398fac2038a635d3bc7322f004fbf78d6f1bbfd...v0.1.0
