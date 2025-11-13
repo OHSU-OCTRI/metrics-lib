@@ -13,7 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Favor accessibility attributes over innerText to populate content
 - Add an observer to capture DOM elements added after the Interactor is initialized
 
-# Changed
+### Changed
 
 - Rename configurable property from interactionElement to interactionSelector
 
