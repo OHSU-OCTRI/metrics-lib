@@ -26,7 +26,7 @@ To create the database tables used by the library, copy the SQL migrations from 
 
 ### Modify the Application Template Advice
 
-To work seamlessly with this library, your application should be using the OCTRI Authentication Library and ideally have been generated using the OCTRI Spring Boot archetype. This will set up some of the appropriate TemplateAdvice elements in the model. Your application should have a file called ApplicationTemplateAdvice. Here, you will want to determine the logic for when metrics should be included on a page. At a minimum, you should ensure the user is logged in. Typically we have only collected metrics on users that are not Admin or Super users. If metrics should be enabled, add the interactor scripts and properties to the page:
+To work seamlessly with this library, your application should be using the OCTRI Authentication Library and ideally have been generated using the OCTRI Spring Boot archetype. This will set up some of the appropriate TemplateAdvice elements in the model. Your application should have a file called ApplicationTemplateAdvice. Here, you will want to determine the logic for when metrics should be included on a page. At a minimum, you should ensure the user is logged in. Typically we have only collected metrics on users that are not Admin or Super users. First, inject the InteractorProperties into the class. If metrics should be enabled, add the interactor scripts and properties to the page:
 
 ```java
 SecurityHelper securityHelper = new SecurityHelper(SecurityContextHolder.getContext());
