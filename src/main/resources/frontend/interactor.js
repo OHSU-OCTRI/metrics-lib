@@ -210,7 +210,11 @@ export default class Interactor {
         this.conversionEvents.forEach(evtType => {
           element.addEventListener(evtType, evt => {
             evt.stopPropagation();
-            this.addInteraction(evt, interactionSelector, 'CONVERSION');
+            this.addInteraction(
+              evt,
+              'CONVERSION',
+              eventContents(evt, interactionSelector)
+            );
           });
         });
       });
@@ -255,14 +259,14 @@ export default class Interactor {
   }
 
   // Record interaction with a page element
-  addInteraction(evt, interactionSelector, type) {
+  addInteraction(evt, type, content) {
     // Interaction Object
     let interaction = {
       type: type,
       event: evt.type,
       targetTag: evt.target.nodeName,
       targetClasses: evt.target.className,
-      content: eventContents(evt, interactionSelector),
+      content: content,
       clientX: evt.clientX,
       clientY: evt.clientY,
       screenX: evt.screenX,
@@ -395,8 +399,17 @@ export default class Interactor {
     interactionEvents.forEach(evtType => {
       element.addEventListener(evtType, evt => {
         evt.stopPropagation();
-        this.addInteraction(evt, interactionSelector, 'INTERACTION');
+        this.addInteraction(evt, 'INTERACTION', eventContents(evt, interactionSelector));
       });
     });
+  }
+
+  /**
+   * Method that can be used externally to manually log interactions.
+   * @param {Event} evt - event details
+   * @param {Object} content
+   */
+  logInteraction(evt, content) {
+    this.addInteraction(evt, 'INTERACTION', content);
   }
 }
