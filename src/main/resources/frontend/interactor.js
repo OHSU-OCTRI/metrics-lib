@@ -410,6 +410,6 @@ export default class Interactor {
    * @param {Object} content
    */
   logInteraction(evt, content) {
-    this.addInteraction(evt, 'INTERACTION', content);
+    this.addInteraction(evt, 'INTERACTION', JSON.stringify(content));
   }
 }

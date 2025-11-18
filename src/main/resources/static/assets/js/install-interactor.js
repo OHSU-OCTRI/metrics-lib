@@ -11,12 +11,12 @@
         return;
       }
       const config = window.interactorConfig;
-      let interactor = new window.Interactor({
+      window.interactor = new window.Interactor({
         ...config,
         endpoint: `${config.contextPath}data/analytics_event`
       });
       // Video interactions
-      interactor.addInteractionElement('video', [
+      window.interactor.addInteractionElement('video', [
         'play',
         'ended',
         'pause',
