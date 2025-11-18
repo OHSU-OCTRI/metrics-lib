@@ -3,7 +3,7 @@
 	<groupId>org.octri.metrics</groupId>
 	<artifactId>metrics_lib</artifactId>
 	<packaging>jar</packaging>
-	<version>0.3.1-SNAPSHOT</version>
+	<version>0.3.2-SNAPSHOT</version>
 	<name>metrics_lib</name>
 	<description>OCTRI Metrics Library</description>
 	<url>https://github.com/OHSU-OCTRI/metrics-lib</url>
