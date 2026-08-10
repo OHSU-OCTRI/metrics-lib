@@ -16,6 +16,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Use shared GitHub Actions workflows (CIS-3773)
 - Create a test build workflow to handle PRs (CIS-3773)
 
+### Dependencies
+
+- Run `npm audit fix` to resolve Node.js vulnerabilities (CIS-3824)
+
 ## [0.4.1] - 2026-06-11
 
 ### Dependencies
