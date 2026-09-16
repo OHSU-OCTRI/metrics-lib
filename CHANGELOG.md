@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Run `npm audit fix` to resolve Node.js vulnerabilities (CIS-3824)
 - Bumps common_lib from 1.7.1 to 2.1.3 (CIS-3862)
+- Bumps authentication_lib from 3.0.0 to 4.3.0 (CIS-3862)
 
 ## [0.4.2] - 2026-08-21
 
