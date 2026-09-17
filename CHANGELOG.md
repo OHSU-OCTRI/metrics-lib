@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Dependencies
+
+- Bumps com.github.eirslett:frontend-maven-plugin from 1.15.4 to 2.0.2 (CIS-3862)
+
 ## [0.4.3] - 2026-09-16
 
 ### Dependencies
