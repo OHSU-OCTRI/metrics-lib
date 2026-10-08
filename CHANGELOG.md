@@ -1,4 +1,4 @@
-# Changelog
+j# Changelog
 
 All notable changes to this project will be documented in this file.
 
@@ -10,7 +10,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Add Spring Boot 4 branch to branches that publish artifacts (CIS-3900)
-- Upgrades from Java 17 to Java 21 (CIS-3900)
+- Upgrades Java from 17 to Java 21 (CIS-3900)
+- Upgrades Spring Boot from 3.5.7 to 4.0.8 (CIS-3900)
 
 ### Dependencies
 
