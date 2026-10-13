@@ -10,8 +10,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Add Spring Boot 4 branch to branches that publish artifacts (CIS-3900)
-- Upgrades Java from 17 to Java 21 (CIS-3900)
-- Upgrades Spring Boot from 3.5.7 to 4.0.8 (CIS-3900)
 
 ### Dependencies
 
@@ -19,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Bumps org.sonatype.central:central-publishing-maven-plugin from 0.10.0 to 0.11.0 (CIS-3862)
 - Run `npm audit fix` to resolve Node.js vulnerabilities (CIS-3889)
 - Bumps org.octri.authentication:authentication_lib from 4.3.0 to 4.4.0 (CIS-3889)
+- Downgrade org.sonatype.central:central-publishing-maven-plugin from 0.11.0 to 0.10.0 (CIS-3900)
 
 ## [0.4.3] - 2026-09-16
 
