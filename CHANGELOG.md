@@ -14,7 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Dependencies
 
 - Upgrades Java from 17 to Java 21 (CIS-3900)
-- Upgrades Spring Boot from 3.5.7 to 4.0.8 (CIS-3900)
+- Upgrades Spring Boot from 3.5.7 to 4.0.9 (CIS-3900)
 - Run `npm audit fix` to resolve Node.js vulnerabilities (CIS-3955)
 
 ## [0.4.4] - 2026-10-14
