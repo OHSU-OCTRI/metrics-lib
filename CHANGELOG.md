@@ -7,8 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Removed temporary workflow changes related to Spring Boot 4 upgrade (CIS-3900)
+
 ### Dependencies
 
+- Upgrades Java from 17 to Java 21 (CIS-3900)
+- Upgrades Spring Boot from 3.5.7 to 4.0.8 (CIS-3900)
 - Run `npm audit fix` to resolve Node.js vulnerabilities (CIS-3889)
 
 ## [0.4.4] - 2026-10-14
@@ -16,8 +22,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Add Spring Boot 4 branch to branches that publish artifacts (CIS-3900)
-- Upgrades Java from 17 to Java 21 (CIS-3900)
-- Upgrades Spring Boot from 3.5.7 to 4.0.8 (CIS-3900)
 
 ### Dependencies
 
