@@ -1,5 +1,6 @@
 package org.octri.metrics.domain;
 
+import java.io.Serial;
 import java.time.Instant;
 
 import org.octri.common.domain.AbstractEntity;
@@ -21,6 +22,7 @@ import jakarta.validation.constraints.NotNull;
 @Entity
 public class Interaction extends AbstractEntity {
 
+	@Serial
 	private static final long serialVersionUID = -5670494104059658146L;
 
 	/**

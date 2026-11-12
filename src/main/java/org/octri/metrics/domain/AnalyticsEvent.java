@@ -1,5 +1,6 @@
 package org.octri.metrics.domain;
 
+import java.io.Serial;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +20,7 @@ import jakarta.validation.constraints.NotNull;
 @Entity
 public class AnalyticsEvent extends AbstractEntity {
 
+	@Serial
 	private static final long serialVersionUID = -4934575154300288678L;
 
 	/**
