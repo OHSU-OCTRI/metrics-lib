@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Dependencies
+
+- Run `npm audit fix` to resolve Node.js vulnerabilities (CIS-3889)
+
 ## [0.4.4] - 2026-10-14
 
 ### Changed
