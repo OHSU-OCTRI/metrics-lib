@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.4.4] - 2026-10-14
+
 ### Changed
 
 - Add Spring Boot 4 branch to branches that publish artifacts (CIS-3900)
@@ -19,7 +21,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Bumps org.sonatype.central:central-publishing-maven-plugin from 0.10.0 to 0.11.0 (CIS-3862)
 - Run `npm audit fix` to resolve Node.js vulnerabilities (CIS-3889)
 - Bumps org.octri.authentication:authentication_lib from 4.3.0 to 4.4.0 (CIS-3889)
-- Downgrade org.sonatype.central:central-publishing-maven-plugin from 0.11.0 to 0.10.0 (CIS-3900)
+- Run `npm audit fix` to resolve Node.js vulnerabilities (CIS-3916)
+- Bumps org.sonatype.central:central-publishing-maven-plugin from 0.11.0 to 0.12.0 (CIS-3916)
 
 ## [0.4.3] - 2026-09-16
 
@@ -92,7 +95,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial implementation of the Metrics Library (COMPASS-127)
 
-[unreleased]: https://github.com/OHSU-OCTRI/metrics-lib/compare/v0.4.3...HEAD
+[unreleased]: https://github.com/OHSU-OCTRI/metrics-lib/compare/v0.4.4...HEAD
+[0.4.4]: https://github.com/OHSU-OCTRI/metrics-lib/compare/v0.4.3...v0.4.4
 [0.4.3]: https://github.com/OHSU-OCTRI/metrics-lib/compare/v0.4.2...v0.4.3
 [0.4.2]: https://github.com/OHSU-OCTRI/metrics-lib/compare/v0.4.1...v0.4.2
 [0.4.1]: https://github.com/OHSU-OCTRI/metrics-lib/compare/v0.4.0...v0.4.1
