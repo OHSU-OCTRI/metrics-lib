@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.0] - 2026-11-12
+
 ### Changed
 
 - Removed temporary workflow changes related to Spring Boot 4 upgrade (CIS-3900)
@@ -103,7 +105,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial implementation of the Metrics Library (COMPASS-127)
 
-[unreleased]: https://github.com/OHSU-OCTRI/metrics-lib/compare/v0.4.4...HEAD
+[unreleased]: https://github.com/OHSU-OCTRI/metrics-lib/compare/v1.0.0...HEAD
+[1.0.0]: https://github.com/OHSU-OCTRI/metrics-lib/compare/v0.4.4...v1.0.0
 [0.4.4]: https://github.com/OHSU-OCTRI/metrics-lib/compare/v0.4.3...v0.4.4
 [0.4.3]: https://github.com/OHSU-OCTRI/metrics-lib/compare/v0.4.2...v0.4.3
 [0.4.2]: https://github.com/OHSU-OCTRI/metrics-lib/compare/v0.4.1...v0.4.2
